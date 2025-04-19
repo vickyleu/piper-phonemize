@@ -106,6 +106,8 @@ if(NOT DEFINED ESPEAK_NG_DIR)
         espeak_ng_external
         PREFIX "${CMAKE_CURRENT_BINARY_DIR}/e"
         URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
+        CMAKE_ARGS -DCMAKE_SYSTEM_NAME=Linux
+        CMAKE_ARGS -DCMAKE_SYSTEM_PROCESSOR=armv7l
         CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${TOOLCHAIN_FILE_ABS}
         CMAKE_ARGS -DCMAKE_=${ESPEAK_NG_DIR}
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${ESPEAK_NG_DIR}
