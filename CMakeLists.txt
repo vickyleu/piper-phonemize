@@ -81,7 +81,7 @@ if(NOT DEFINED ONNXRUNTIME_DIR)
             message(FATAL_ERROR "Unsupported architecture for onnxruntime")
         endif()
 
-        set(ONNXRUNTIME_EXT "tgz")
+        set(ONNXRUNTIME_EXT "zip")
     endif()
 
     if(NOT DEFINED ONNXRUNTIME_URL)
