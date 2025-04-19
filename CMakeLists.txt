@@ -106,22 +106,25 @@ if(NOT DEFINED ESPEAK_NG_DIR)
         espeak_ng_external
         PREFIX "${CMAKE_CURRENT_BINARY_DIR}/e"
         URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
-        CMAKE_ARGS -DCMAKE_SYSTEM_NAME=Linux
-        CMAKE_ARGS -DCMAKE_SYSTEM_PROCESSOR=armv7l
-        CMAKE_ARGS -D__APPLE__=0
-        CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${TOOLCHAIN_FILE_ABS}
-        CMAKE_ARGS -DCMAKE_=${ESPEAK_NG_DIR}
-        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${ESPEAK_NG_DIR}
-        CMAKE_ARGS -DUSE_ASYNC:BOOL=OFF
-        CMAKE_ARGS -DBUILD_SHARED_LIBS:BOOL=OFF
-        CMAKE_ARGS -DUSE_MBROLA:BOOL=OFF
-        CMAKE_ARGS -DUSE_LIBSONIC:BOOL=OFF
-        CMAKE_ARGS -DUSE_LIBPCAUDIO:BOOL=OFF
-        CMAKE_ARGS -DUSE_KLATT:BOOL=OFF
-        CMAKE_ARGS -DUSE_SPEECHPLAYER:BOOL=OFF
-        CMAKE_ARGS -DEXTRA_cmn:BOOL=ON
-        CMAKE_ARGS -DEXTRA_ru:BOOL=ON
-        CMAKE_ARGS -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64"
+        CMAKE_ARGS
+            -DCMAKE_SYSTEM_NAME=Linux
+            -DCMAKE_SYSTEM_PROCESSOR=armv7l
+            -D__APPLE__=0
+            -DCMAKE_INSTALL_PREFIX:PATH=${ESPEAK_NG_DIR}
+            -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${TOOLCHAIN_FILE_ABS}
+            -DFMT_TEST:BOOL=OFF
+            -DUSE_ASYNC:BOOL=OFF
+            -DBUILD_SHARED_LIBS:BOOL=OFF
+            -DUSE_MBROLA:BOOL=OFF
+            -DUSE_LIBSONIC:BOOL=OFF
+            -DUSE_LIBPCAUDIO:BOOL=OFF
+            -DUSE_KLATT:BOOL=OFF
+            -DUSE_SPEECHPLAYER:BOOL=OFF
+            -DEXTRA_cmn:BOOL=ON
+            -DEXTRA_ru:BOOL=ON
+            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 -nostdinc -isystem ${CMAKE_ARMHF_TOOLCHAIN_GCCROOT}"
+            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 -nostdinc++ -isystem ${CMAKE_ARMHF_TOOLCHAIN_CPPROOT}"  # 关键隔离选项
+            --no-warn-unused-cli  # 抑制无关警告
     )
     add_dependencies(piper_phonemize espeak_ng_external)
 endif()
