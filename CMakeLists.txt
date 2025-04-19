@@ -99,15 +99,18 @@ endif()
 
 if(NOT DEFINED ESPEAK_NG_DIR)
     set(ESPEAK_NG_DIR "${CMAKE_CURRENT_BINARY_DIR}/ei")
-
+    # 获取当前工具链文件的绝对路径
+    get_filename_component(TOOLCHAIN_FILE_ABS "${CMAKE_TOOLCHAIN_FILE}" ABSOLUTE)
     include(ExternalProject)
     ExternalProject_Add(
         espeak_ng_external
         PREFIX "${CMAKE_CURRENT_BINARY_DIR}/e"
-        URL "https://github.com/rhasspy/espeak-ng/archive/0f65aa301e0d6bae5e172cc74197d32a6182200f.zip"
+        URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
+        CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${TOOLCHAIN_FILE_ABS}
+        CMAKE_ARGS -DCMAKE_=${ESPEAK_NG_DIR}
         CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${ESPEAK_NG_DIR}
         CMAKE_ARGS -DUSE_ASYNC:BOOL=OFF
-        CMAKE_ARGS -DBUILD_SHARED_LIBS:BOOL=ON
+        CMAKE_ARGS -DBUILD_SHARED_LIBS:BOOL=OFF
         CMAKE_ARGS -DUSE_MBROLA:BOOL=OFF
         CMAKE_ARGS -DUSE_LIBSONIC:BOOL=OFF
         CMAKE_ARGS -DUSE_LIBPCAUDIO:BOOL=OFF
