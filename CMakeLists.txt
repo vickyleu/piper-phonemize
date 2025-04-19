@@ -122,8 +122,8 @@ if(NOT DEFINED ESPEAK_NG_DIR)
             -DUSE_SPEECHPLAYER:BOOL=OFF
             -DEXTRA_cmn:BOOL=ON
             -DEXTRA_ru:BOOL=ON
-            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 -nostdinc -isystem ${CMAKE_ARMHF_TOOLCHAIN_GCCROOT}"
-            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 -nostdinc++ -isystem ${CMAKE_ARMHF_TOOLCHAIN_CPPROOT}"  # 关键隔离选项
+            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_C_FLAGS} -nostdinc -isystem ${CMAKE_ARMHF_TOOLCHAIN_GCCROOT}"
+            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_CXX_FLAGS} -nostdinc++ -isystem ${CMAKE_ARMHF_TOOLCHAIN_CPPROOT}"  # 关键隔离选项
             --no-warn-unused-cli  # 抑制无关警告
     )
     add_dependencies(piper_phonemize espeak_ng_external)
