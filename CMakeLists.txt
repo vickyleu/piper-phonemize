@@ -11,18 +11,22 @@ project(
 )
 
 
-add_compile_options(-Wno-psabi -march=armv7-a -mfloat-abi=hard)
 
+set(CMAKE_CXX_FLAGS_OLD "${CMAKE_CXX_FLAGS}")
+set(CMAKE_C_FLAGS_OLD "${CMAKE_C_FLAGS}")
 if(MSVC)
     # Force compiler to use UTF-8 for IPA constants
     add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
     add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
 elseif(NOT APPLE)
+    add_compile_options(-Wno-psabi -march=armv7-a -mfloat-abi=hard)
     # Linux flags
-    string(APPEND CMAKE_CXX_FLAGS " -include cstdint -Wall -Wextra -Wl,-rpath,'$ORIGIN'")
-    string(APPEND CMAKE_C_FLAGS " -include cstdint -Wall -Wextra")
-    MESSAGE("你妈了个逼的到底要怎样")
+    add_compile_options(-Wall -Wextra)
+    # C++ 文件包含 cstdint
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include cstdint")
+    # 设置运行时路径
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
 endif()
 
 add_library(
@@ -125,8 +129,8 @@ if(NOT DEFINED ESPEAK_NG_DIR)
             -DUSE_SPEECHPLAYER:BOOL=OFF
             -DEXTRA_cmn:BOOL=ON
             -DEXTRA_ru:BOOL=ON
-            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_C_FLAGS} "
-            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_CXX_FLAGS} "  # 关键隔离选项
+            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_C_FLAGS_OLD} "
+            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_CXX_FLAGS_OLD} "  # 关键隔离选项
             --no-warn-unused-cli  # 抑制无关警告
     )
     add_dependencies(piper_phonemize espeak_ng_external)
