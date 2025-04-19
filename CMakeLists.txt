@@ -106,6 +106,9 @@ if(NOT DEFINED ESPEAK_NG_DIR)
         espeak_ng_external
         PREFIX "${CMAKE_CURRENT_BINARY_DIR}/e"
         URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
+        PATCH_COMMAND ${CMAKE_COMMAND} -E echo "Patching espeak-ng sources..." &&
+        sed -i "s/#[[:space:]]*include <libkern\/OSByteOrder.h>/#if 0\n\/\/ 禁用 macOS 特定头文件\n#include <libkern\/OSByteOrder.h>\n#endif/g"
+        <SOURCE_DIR>/src/include/compat/endian.h
         CMAKE_ARGS
             -DCMAKE_SYSTEM_NAME=Linux
             -DCMAKE_SYSTEM_PROCESSOR=armv7l
