@@ -117,6 +117,8 @@ if(NOT DEFINED ESPEAK_NG_DIR)
             -DUSE_MBROLA:BOOL=OFF
             -DUSE_LIBSONIC:BOOL=OFF
             -DUSE_LIBPCAUDIO:BOOL=OFF
+            -DBUILD_ESPEAK_NG_EXE:BOOL=OFF # missing this mother fucker macro
+            -DBUILD_ESPEAK_NG_TESTS:BOOL=OFF
             -DUSE_KLATT:BOOL=OFF
             -DUSE_SPEECHPLAYER:BOOL=OFF
             -DEXTRA_cmn:BOOL=ON
