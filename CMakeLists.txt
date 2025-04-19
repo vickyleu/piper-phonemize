@@ -76,7 +76,7 @@ if(NOT DEFINED ONNXRUNTIME_DIR)
         elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL armv7l)
             # Linux ARM 32-bit
             set(ONNXRUNTIME_PREFIX "onnxruntime-linux-arm32-${ONNXRUNTIME_VERSION}")
-            set(ONNXRUNTIME_URL "https://github.com/synesthesiam/prebuilt-apps/releases/download/v1.0/onnxruntime-linux-arm32-${ONNXRUNTIME_VERSION}.tgz")
+            set(ONNXRUNTIME_URL "https://github.com/vickyleu/prebuilt-apps/releases/download/v1.0/onnxruntime-linux-arm32-${ONNXRUNTIME_VERSION}.zip")
         else()
             message(FATAL_ERROR "Unsupported architecture for onnxruntime")
         endif()
