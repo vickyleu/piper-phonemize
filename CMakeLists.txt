@@ -10,9 +10,9 @@ project(
     LANGUAGES CXX
 )
 
-MESSAGE("妈拉个巴子 CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS}")
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_compile_options(-Wno-psabi -march=armv7-a -mfloat-abi=hard)
+
 if(MSVC)
     # Force compiler to use UTF-8 for IPA constants
     add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
@@ -20,8 +20,9 @@ if(MSVC)
 
 elseif(NOT APPLE)
     # Linux flags
-    string(APPEND CMAKE_CXX_FLAGS " -Wall -Wextra -Wl,-rpath,'$ORIGIN'")
-    string(APPEND CMAKE_C_FLAGS " -Wall -Wextra")
+    string(APPEND CMAKE_CXX_FLAGS " -include cstdint -Wall -Wextra -Wl,-rpath,'$ORIGIN'")
+    string(APPEND CMAKE_C_FLAGS " -include cstdint -Wall -Wextra")
+    MESSAGE("你妈了个逼的到底要怎样")
 endif()
 
 add_library(
