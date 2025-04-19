@@ -106,10 +106,10 @@ if(NOT DEFINED ESPEAK_NG_DIR)
         espeak_ng_external
         PREFIX "${CMAKE_CURRENT_BINARY_DIR}/e"
         URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
+        PATCH_COMMAND ${CMAKE_COMMAND} -E echo "Patching espeak-ng sources..." && sed -i "" "s/#[[:space:]]*include <libkern\\/OSByteOrder.h>/#if 0\\n\\/\\/ 禁用 macOS 特定头文件\\n#include <libkern\\/OSByteOrder.h>\\n#endif/g" <SOURCE_DIR>/src/include/compat/endian.h
         CMAKE_ARGS
             -DCMAKE_SYSTEM_NAME=Linux
             -DCMAKE_SYSTEM_PROCESSOR=armv7l
-            -D__APPLE__=0
             -DCMAKE_INSTALL_PREFIX:PATH=${ESPEAK_NG_DIR}
             -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${TOOLCHAIN_FILE_ABS}
             -DFMT_TEST:BOOL=OFF
@@ -122,8 +122,8 @@ if(NOT DEFINED ESPEAK_NG_DIR)
             -DUSE_SPEECHPLAYER:BOOL=OFF
             -DEXTRA_cmn:BOOL=ON
             -DEXTRA_ru:BOOL=ON
-            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_C_FLAGS} -nostdinc -isystem ${CMAKE_ARMHF_TOOLCHAIN_GCCROOT}"
-            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_CXX_FLAGS} -nostdinc++ -isystem ${CMAKE_ARMHF_TOOLCHAIN_CPPROOT}"  # 关键隔离选项
+            -DCMAKE_C_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_C_FLAGS} "
+            -DCMAKE_CXX_FLAGS="-D_FILE_OFFSET_BITS=64 ${CMAKE_CXX_FLAGS} "  # 关键隔离选项
             --no-warn-unused-cli  # 抑制无关警告
     )
     add_dependencies(piper_phonemize espeak_ng_external)
