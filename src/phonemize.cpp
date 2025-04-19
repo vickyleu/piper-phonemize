@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <espeak-ng/speak_lib.h>
+#include <cstdint>  // 添加此行
 #include <onnxruntime_cxx_api.h>
 
 #include "phonemize.hpp"

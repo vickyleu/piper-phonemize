@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
-
+#include <cstdint>  // 添加此行
 #include <onnxruntime_cxx_api.h>
 
 #include "tashkeel.hpp"

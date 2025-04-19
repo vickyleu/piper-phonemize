@@ -11,7 +11,8 @@ project(
 )
 
 MESSAGE("妈拉个巴子 CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS}")
-
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(MSVC)
     # Force compiler to use UTF-8 for IPA constants
     add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
