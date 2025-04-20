@@ -70,6 +70,7 @@ if(NOT DEFINED ONNXRUNTIME_DIR)
         endif()
         set(ONNXRUNTIME_EXT "zip")
     else()
+        MESSAGE("哎哟卧槽=${uname}===")
         if(CMAKE_SYSTEM_PROCESSOR STREQUAL x86_64)
             # MacOS x86-64
             set(ONNXRUNTIME_PREFIX "onnxruntime-osx-x86_64-${ONNXRUNTIME_VERSION}")
