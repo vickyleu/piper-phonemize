@@ -10,7 +10,7 @@ project(
     LANGUAGES CXX
 )
 
-
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
 set(CMAKE_CXX_FLAGS_OLD "${CMAKE_CXX_FLAGS}")
 set(CMAKE_C_FLAGS_OLD "${CMAKE_C_FLAGS}")
@@ -29,13 +29,25 @@ elseif(NOT APPLE)
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
 endif()
 
-add_library(
-    piper_phonemize SHARED
-    src/phonemize.cpp
-    src/phoneme_ids.cpp
-    src/tashkeel.cpp
-    src/shared.cpp
-)
+if (BUILD_SHARED_LIBS)
+    add_library(
+            piper_phonemize SHARED
+            src/phonemize.cpp
+            src/phoneme_ids.cpp
+            src/tashkeel.cpp
+            src/shared.cpp
+    )
+else ()
+    add_library(
+            piper_phonemize STATIC
+            src/phonemize.cpp
+            src/phoneme_ids.cpp
+            src/tashkeel.cpp
+            src/shared.cpp
+    )
+endif ()
+
+
 
 set_target_properties(piper_phonemize PROPERTIES
     VERSION ${PROJECT_VERSION}
