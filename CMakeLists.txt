@@ -10,8 +10,6 @@ project(
     LANGUAGES CXX
 )
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-
 set(CMAKE_CXX_FLAGS_OLD "${CMAKE_CXX_FLAGS}")
 set(CMAKE_C_FLAGS_OLD "${CMAKE_C_FLAGS}")
 if(MSVC)
