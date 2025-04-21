@@ -64,6 +64,7 @@ if(NOT DEFINED ONNXRUNTIME_DIR)
         else()
             message(FATAL_ERROR "Unsupported architecture for onnxruntime")
         endif()
+
         set(ONNXRUNTIME_EXT "tgz")
     else()
         if(CMAKE_SYSTEM_PROCESSOR STREQUAL x86_64)
@@ -79,8 +80,10 @@ if(NOT DEFINED ONNXRUNTIME_DIR)
         else()
             message(FATAL_ERROR "Unsupported architecture for onnxruntime")
         endif()
+
         set(ONNXRUNTIME_EXT "zip")
     endif()
+
     if(NOT DEFINED ONNXRUNTIME_URL)
         set(ONNXRUNTIME_URL "https://github.com/microsoft/onnxruntime/releases/download/v${ONNXRUNTIME_VERSION}/${ONNXRUNTIME_PREFIX}.${ONNXRUNTIME_EXT}")
     endif()
