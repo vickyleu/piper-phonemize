@@ -23,8 +23,13 @@ elseif(NOT APPLE)
     add_compile_options(-Wall -Wextra)
     # C++ 文件包含 cstdint
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include cstdint")
-    # 设置运行时路径
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
+    if (BUILD_SHARED_LIBS)
+        # 设置运行时路径
+        set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
+    else ()
+        set(CMAKE_STATIC_LINKER_FLAGS "")
+    endif ()
+
 endif()
 
 if (BUILD_SHARED_LIBS)
