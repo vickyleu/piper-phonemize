@@ -57,7 +57,7 @@ set_target_properties(piper_phonemize PROPERTIES
 # Look for onnxruntime files in <root>/lib
 if(NOT DEFINED ONNXRUNTIME_DIR)
     if(NOT DEFINED ONNXRUNTIME_VERSION)
-        set(ONNXRUNTIME_VERSION "1.14.1")
+        set(ONNXRUNTIME_VERSION "1.16.3")
     endif()
 
     if(WIN32)
@@ -123,7 +123,8 @@ if(NOT DEFINED ESPEAK_NG_DIR)
     ExternalProject_Add(
         espeak_ng_external
         PREFIX "${CMAKE_CURRENT_BINARY_DIR}/e"
-        URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
+#        URL "https://github.com/vickyleu/espeak-ng/archive/refs/tags/2025.4.19-5.zip"
+        URL "https://github.com/vickyleu/espeak-ng/archive/refs/heads/master.zip"
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=${ESPEAK_NG_DIR}
             -DCMAKE_TOOLCHAIN_FILE:FILEPATH=${TOOLCHAIN_FILE_ABS}
