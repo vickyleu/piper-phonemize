@@ -88,7 +88,7 @@ if(NOT DEFINED ONNXRUNTIME_DIR)
         elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL aarch64)
             # Linux ARM 64-bit
             set(ONNXRUNTIME_PREFIX "onnxruntime-linux-aarch64-${ONNXRUNTIME_VERSION}")
-        elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL armv7l)
+        elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^armv7(l)?$")
             # Linux ARM 32-bit
             set(ONNXRUNTIME_PREFIX "onnxruntime-linux-arm32-${ONNXRUNTIME_VERSION}")
             set(ONNXRUNTIME_URL "https://github.com/vickyleu/prebuilt-apps/releases/download/1.0.0/onnxruntime-linux-arm32-${ONNXRUNTIME_VERSION}.zip")
