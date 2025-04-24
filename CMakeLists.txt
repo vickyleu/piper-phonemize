@@ -154,7 +154,8 @@ endif()
 
 
 # ---- Declare library ----
-
+set(THREADS_PREFER_PTHREAD_FLAG ON)            # 优先使用 -pthread
+find_package(Threads REQUIRED)                 # 查找线程库
 target_include_directories(
     piper_phonemize PUBLIC
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>"
