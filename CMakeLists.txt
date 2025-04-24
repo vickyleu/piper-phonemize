@@ -169,12 +169,12 @@ target_link_directories(
 )
 
 target_link_libraries(
-    piper_phonemize
+    # 使用关键字签名，避免 plain/keyword 混用
+    piper_phonemize  PRIVATE
     espeak-ng
     onnxruntime
-    -pthread
+    Threads::Threads    # 推荐用 Threads 模块链接 pthread
 )
-target_compile_options(piper_phonemize PRIVATE -pthread)
 
 target_compile_features(piper_phonemize PUBLIC cxx_std_17)
 
