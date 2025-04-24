@@ -175,6 +175,7 @@ target_link_libraries(
     espeak-ng
     onnxruntime
     Threads::Threads    # 推荐用 Threads 模块链接 pthread
+    dl
 )
 
 target_compile_features(piper_phonemize PUBLIC cxx_std_17)
