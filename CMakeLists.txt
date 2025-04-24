@@ -172,9 +172,9 @@ target_link_libraries(
     piper_phonemize
     espeak-ng
     onnxruntime
+    -pthread
 )
 target_compile_options(piper_phonemize PRIVATE -pthread)
-target_link_libraries(piper_phonemize PRIVATE -pthread)
 
 target_compile_features(piper_phonemize PUBLIC cxx_std_17)
 
